@@ -52,3 +52,5 @@ def logistic_regression(features, target, iterations, learning_rate):
             print("LL", log_likelihood(features, target, weights))
 
     return weights
+
+weights = logistic_regression(data_features, data_labels, iterations=10000, learning_rate=0.01)
