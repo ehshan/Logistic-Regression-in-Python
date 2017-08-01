@@ -6,7 +6,7 @@ data_points = 1000
 
 pos_mean = [0, 1]
 neg_mean = [1, 4]
-cov = [[1, .5], [.5, 1]]
+cov = [[1, .7], [.7, 1]]
 
 pos_data = np.random.multivariate_normal(pos_mean, cov, data_points)
 
