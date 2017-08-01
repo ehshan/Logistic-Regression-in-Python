@@ -19,3 +19,11 @@ labels = np.hstack((np.zeros(data_points), np.ones(data_points)))
 
 def sigmoid(x):
     return 1 / (1 + np.exp(-x))
+
+
+# Sum of the log of the Probability that data_point(x) produces target(y) given weight(w)
+def log_likelihood(data_point, target, weights):
+    scores = np.dot(data_point, weights)
+    # Log of the product = the sum of the logs
+    l_l = np.sum(target * scores - np.log(1 + np.exp(scores)))
+    return l_l
