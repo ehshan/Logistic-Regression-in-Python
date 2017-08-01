@@ -27,3 +27,10 @@ def log_likelihood(data_point, target, weights):
     # Log of the product = the sum of the logs
     l_l = np.sum(target * scores - np.log(1 + np.exp(scores)))
     return l_l
+
+
+# Gradient of LogLikelihood = features(X) * (target(Y) - Predictions)
+def gradient(feature_array, target, predictions):
+    error = target - predictions
+    g = np.dot(feature_array.T, error)
+    return g
