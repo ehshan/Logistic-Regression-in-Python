@@ -34,3 +34,21 @@ def gradient(features, target, predictions):
     error = target - predictions
     g = np.dot(features.T, error)
     return g
+
+
+def logistic_regression(features, target, iterations, learning_rate):
+    # Initial array for weights
+    weights = np.zeros(features.shape[1])
+
+    for i in range(iterations):
+        scores = np.dot(features, weights)
+        prediction = sigmoid(scores)
+
+        g = gradient(features, target, prediction)
+        weights += learning_rate * g
+
+        # Print log-likelihood every so often
+        if i % 1000 == 0:
+            print("LL", log_likelihood(features, target, weights))
+
+    return weights
