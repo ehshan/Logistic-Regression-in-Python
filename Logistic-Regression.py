@@ -12,9 +12,9 @@ pos_data = np.random.multivariate_normal(pos_mean, cov, data_points)
 
 neg_data = np.random.multivariate_normal(neg_mean, cov, data_points)
 
-features = np.vstack((pos_data, neg_data)).astype(np.float32)
+data_features = np.vstack((pos_data, neg_data)).astype(np.float32)
 
-labels = np.hstack((np.zeros(data_points), np.ones(data_points)))
+data_labels = np.hstack((np.zeros(data_points), np.ones(data_points)))
 
 
 def sigmoid(x):
@@ -22,15 +22,15 @@ def sigmoid(x):
 
 
 # Sum of the log of the Probability that data_point(x) produces target(y) given weight(w)
-def log_likelihood(data_point, target, weights):
-    scores = np.dot(data_point, weights)
+def log_likelihood(features, target, weights):
+    scores = np.dot(features, weights)
     # Log of the product = the sum of the logs
     l_l = np.sum(target * scores - np.log(1 + np.exp(scores)))
     return l_l
 
 
 # Gradient of LogLikelihood = features(X) * (target(Y) - Predictions)
-def gradient(feature_array, target, predictions):
+def gradient(features, target, predictions):
     error = target - predictions
-    g = np.dot(feature_array.T, error)
+    g = np.dot(features.T, error)
     return g
