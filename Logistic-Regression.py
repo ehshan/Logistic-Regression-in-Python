@@ -16,3 +16,6 @@ features = np.vstack((pos_data, neg_data)).astype(np.float32)
 
 labels = np.hstack((np.zeros(data_points), np.ones(data_points)))
 
+
+def sigmoid(x):
+    return 1 / (1 + np.exp(-x))
