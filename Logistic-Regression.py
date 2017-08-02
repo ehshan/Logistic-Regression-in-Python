@@ -54,7 +54,7 @@ def logistic_regression(features, target, iterations, learning_rate, intercept=F
         weights += learning_rate * g
 
         if i % 1000 == 0:
-            print("LL", log_likelihood(features, target, weights))
+            print("Iteration:", i, "Log Likelihood:", log_likelihood(features, target, weights))
 
     return weights
 
