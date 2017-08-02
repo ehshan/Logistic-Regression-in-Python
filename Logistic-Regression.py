@@ -58,4 +58,12 @@ def logistic_regression(features, target, iterations, learning_rate, intercept=F
 
     return weights
 
-weight = logistic_regression(data_features, data_labels, iterations=10000, learning_rate=0.01, intercept=True)
+weights = logistic_regression(data_features, data_labels, iterations=10000, learning_rate=0.01, intercept=True)
+
+# Calculate the accuracy of model
+# All data
+data_with_intercept = np.hstack((np.ones((data_features.shape[0], 1)), data_features))
+# Compute the outputs
+model_scores = np.dot(data_with_intercept, weights)
+# Assign output a class
+predictions = np.round(sigmoid(model_scores))
