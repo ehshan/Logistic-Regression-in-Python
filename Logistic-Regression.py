@@ -67,3 +67,6 @@ data_with_intercept = np.hstack((np.ones((data_features.shape[0], 1)), data_feat
 model_scores = np.dot(data_with_intercept, weights)
 # Assign output a class
 predictions = np.round(sigmoid(model_scores))
+
+# Print results
+print ('Model Accuracy: {0}'.format((predictions== data_labels).sum().astype(float) / len(predictions)))
