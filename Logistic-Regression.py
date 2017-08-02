@@ -36,7 +36,13 @@ def gradient(features, target, predictions):
     return g
 
 
-def logistic_regression(features, target, iterations, learning_rate):
+def logistic_regression(features, target, iterations, learning_rate, intercept=False):
+
+    # For when predictor is 0
+    if intercept:
+        intercept = np.ones((features.shape[0],1))
+        features = np.hstack((intercept, features))
+
     # Initial array for weights
     weights = np.zeros(features.shape[1])
 
@@ -47,10 +53,9 @@ def logistic_regression(features, target, iterations, learning_rate):
         g = gradient(features, target, prediction)
         weights += learning_rate * g
 
-        # Print log-likelihood every so often
         if i % 1000 == 0:
             print("LL", log_likelihood(features, target, weights))
 
     return weights
 
-weights = logistic_regression(data_features, data_labels, iterations=10000, learning_rate=0.01)
+weight = logistic_regression(data_features, data_labels, iterations=10000, learning_rate=0.01, intercept=True)
