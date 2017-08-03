@@ -8,20 +8,23 @@ pos_mean = [0, 1]
 neg_mean = [1, 4]
 cov = [[1, .7], [.7, 1]]
 
+# Mock posiive class
 pos_data = np.random.multivariate_normal(pos_mean, cov, data_points)
-
+# Mock negative class
 neg_data = np.random.multivariate_normal(neg_mean, cov, data_points)
-
+# All data points
 data_features = np.vstack((pos_data, neg_data)).astype(np.float32)
-
+# Split labels between classes
 data_labels = np.hstack((np.zeros(data_points), np.ones(data_points)))
 
 
+# Link function
 def sigmoid(x):
     return 1 / (1 + np.exp(-x))
 
 
 # Sum of the log of the Probability that data_point(x) produces target(y) given weight(w)
+# Maximisation function
 def log_likelihood(features, target, weights):
     scores = np.dot(features, weights)
     # Log of the product = the sum of the logs
@@ -36,11 +39,11 @@ def gradient(features, target, predictions):
     return g
 
 
+# Main function
 def logistic_regression(features, target, iterations, learning_rate, intercept=False):
-
     # For when predictor is 0
     if intercept:
-        intercept = np.ones((features.shape[0],1))
+        intercept = np.ones((features.shape[0], 1))
         features = np.hstack((intercept, features))
 
     # Initial array for weights
@@ -58,6 +61,7 @@ def logistic_regression(features, target, iterations, learning_rate, intercept=F
 
     return weights
 
+# Weights that maximise correct classification
 weights = logistic_regression(data_features, data_labels, iterations=10000, learning_rate=0.01, intercept=True)
 
 # Calculate the accuracy of model
@@ -69,4 +73,4 @@ model_scores = np.dot(data_with_intercept, weights)
 predictions = np.round(sigmoid(model_scores))
 
 # Print results
-print ('Model Accuracy: {0}'.format((predictions== data_labels).sum().astype(float) / len(predictions)))
+print('Model Accuracy: {0}'.format((predictions == data_labels).sum().astype(float) / len(predictions)))
