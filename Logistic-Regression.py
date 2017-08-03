@@ -9,7 +9,7 @@ pos_mean = [0, 1]
 neg_mean = [1, 4]
 cov = [[1, .7], [.7, 1]]
 
-# Mock posiive class
+# Mock positive class
 pos_data = np.random.multivariate_normal(pos_mean, cov, data_points)
 # Mock negative class
 neg_data = np.random.multivariate_normal(neg_mean, cov, data_points)
