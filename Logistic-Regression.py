@@ -1,4 +1,5 @@
 import numpy as np
+import matplotlib.pyplot as plt
 
 # generate sample data
 np.random.seed(1)
@@ -16,6 +17,11 @@ neg_data = np.random.multivariate_normal(neg_mean, cov, data_points)
 data_features = np.vstack((pos_data, neg_data)).astype(np.float32)
 # Split labels between classes
 data_labels = np.hstack((np.zeros(data_points), np.ones(data_points)))
+
+# Visualise generated data
+plt.figure(figsize=(12, 8))
+plt.scatter(data_features[:, 0], data_features[:, 1], c=data_labels, alpha=.5)
+plt.show()
 
 
 # Link function
@@ -74,3 +80,8 @@ predictions = np.round(sigmoid(model_scores))
 
 # Print results
 print('Model Accuracy: {0}'.format((predictions == data_labels).sum().astype(float) / len(predictions)))
+
+# Visualise the model results
+plt.figure(figsize=(12, 8))
+plt.scatter(data_features[:, 0], data_features[:, 1], c=predictions == data_labels - 1, alpha=.5)
+plt.show()
